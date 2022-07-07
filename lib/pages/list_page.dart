@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:practiceddd/pages/adding_page.dart';
 
-class TodoList extends StatelessWidget {
-  final List<String> todos = <String>['A', 'B', 'C'];
+class TodoList extends StatefulWidget {
+  
+
+    const TodoList({ Key? key }) : super(key: key);
 
   @override
+  State<TodoList> createState() => _TodoListState();
+}
+
+class _TodoListState extends State<TodoList> {
+    final List<String> todos = <String>['A', 'B', 'C'];
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -28,7 +36,7 @@ class TodoList extends StatelessWidget {
     floatingActionButton: FloatingActionButton(
     onPressed: () async {
       final addedtodo = await Navigator.of(context).push(
-               MaterialPageRoute(builder: (context) {
+                MaterialPageRoute(builder: (context) {
                 return AddingPage();
               })
       );
@@ -38,7 +46,10 @@ class TodoList extends StatelessWidget {
           todos.add(addedtodo);
         });
       };
-    }
+      
+    },
+    child: Icon(Icons.add),
+    ),
   );
     }  
     }
