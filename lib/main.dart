@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practiceddd/ui/list_page.dart';
+import 'package:practiceddd/pages/list_page.dart';
 void main() {
   runApp(MyApp());
 }
