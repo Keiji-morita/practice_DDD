@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:practiceddd/pages/adding_page.dart';
 
+import '../domain/note/todo_class.dart';
+
 class TodoList extends StatefulWidget {
   
 
@@ -11,7 +13,7 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
-    final List<String> todos = <String>['A', 'B', 'C'];
+    // final List<String> todos = <String>['A', 'B', 'C'];
 
   Widget build(BuildContext context) {
     return Scaffold(
