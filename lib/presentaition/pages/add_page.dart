@@ -11,6 +11,7 @@ class AddingPage extends StatefulWidget {
 
 class _AddingPageState extends State<AddingPage> {
   final _todoController = TextEditingController();
+  String addedTodo = "";
   
   @override
   void dispose() {
@@ -30,7 +31,14 @@ class _AddingPageState extends State<AddingPage> {
             children: [
               TextField(
                 controller: _todoController,
+                
+                // onChanged:(text){
+                //   setState(() {
+                //     addedTodo = text;
+                //   });
+                // },
               ),
+
 
               ElevatedButton(
                 onPressed: (){
@@ -38,10 +46,11 @@ class _AddingPageState extends State<AddingPage> {
 
                   setState(() {
                     Todos.add(_todoController.text);
-                  } 
+                    } 
                   );
 
                   print(Todos);
+                  // print(addedTodo);
                 },
                 child: Text('Yarude!'),
               ),
