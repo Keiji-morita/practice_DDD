@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../domain/todo_data.dart';
+
 class AddingPage extends StatefulWidget {
     const AddingPage({ Key? key }) : super(key: key);
 
@@ -8,11 +10,11 @@ class AddingPage extends StatefulWidget {
 }
 
 class _AddingPageState extends State<AddingPage> {
-  final _todocontroller = TextEditingController();
+  final _todoController = TextEditingController();
   
   @override
   void dispose() {
-    _todocontroller.dispose();
+    _todoController.dispose();
     super.dispose();
   }
 
@@ -27,12 +29,19 @@ class _AddingPageState extends State<AddingPage> {
           child: Column(
             children: [
               TextField(
-                controller: _todocontroller,
+                controller: _todoController,
               ),
 
               ElevatedButton(
                 onPressed: (){
-                  Navigator.of(context).pop(_todocontroller.text);
+                  Navigator.pop(context);
+
+                  setState(() {
+                    Todos.add(_todoController.text);
+                  } 
+                  );
+
+                  print(Todos);
                 },
                 child: Text('Yarude!'),
               ),
