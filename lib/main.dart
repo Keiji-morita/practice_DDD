@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:practiceddd/presentaition/pages/list_page.dart';
-
+import 'package:practiceddd/presentaition/pages/todo/list_page.dart';
 
 void main() {
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: TodoList(),
+      home: const TodoList(),
     );
   }
 }
