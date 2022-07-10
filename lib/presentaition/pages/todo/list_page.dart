@@ -22,7 +22,7 @@ class TodoList extends ConsumerWidget {
             return new Dismissible( 
               key: Key(state.todoList.length.toString()),
               onDismissed: (DismissDirection direction) {
-                  notifier.deleteTodo(state.todoList.length);
+                  notifier.deleteTodo(todo.id);
               },
 
             child: SizedBox(

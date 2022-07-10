@@ -37,7 +37,6 @@ class TodoNotifier extends StateNotifier<TodoState> {
   }
 
   void deleteTodo(int id) {
-
     final newList = state.todoList.where((Todo) => Todo.id != id).toList();
     state = state.copyWith(todoList: newList);
   }

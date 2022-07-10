@@ -25,8 +25,6 @@ class AddingPage extends ConsumerWidget {
               onPressed: () {
                 notifier.addTodo(todoController.text);
                 Navigator.pop(context);
-
-                print(TodoState);
               },
               child: const Text('Yarude!'),
             ),
