@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practiceddd/presentaition/notifiers/todo_notifier.dart';
 import 'package:practiceddd/presentaition/pages/todo/add_page.dart';
 
-class TodoList extends StatefulWidget {
+class TodoList extends ConsumerWidget {
   const TodoList({Key? key}) : super(key: key);
 
-  @override
-  State<TodoList> createState() => _TodoListState();
-}
-
-class _TodoListState extends State<TodoList> {
-  Widget build(BuildContext context) {
-    const state = TodoState();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(todoNotifierProvider);
+    final notifier = ref.watch(todoNotifierProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -22,13 +19,20 @@ class _TodoListState extends State<TodoList> {
           itemCount: state.todoList.length,
           itemBuilder: (BuildContext context, int index) {
             final todo = state.todoList[index];
-            return SizedBox(
+            return new Dismissible( 
+              key: Key(state.todoList.length.toString()),
+              onDismissed: (DismissDirection direction) {
+                  notifier.deleteTodo(state.todoList.length);
+              },
+
+            child: SizedBox(
               height: 50,
               child: Card(
                 child: Center(
                   child: Text(todo.title),
                 ),
               ),
+            )
             );
           },
         ),
@@ -40,11 +44,9 @@ class _TodoListState extends State<TodoList> {
             MaterialPageRoute<void>(
               builder: (context) => const AddingPage(),
             ),
-          ).then((value) {
-            setState(() {});
-          });
+          );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

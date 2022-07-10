@@ -1,4 +1,9 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practiceddd/domain/todo/todo_data.dart';
+
+final todoNotifierProvider = StateNotifierProvider<TodoNotifier, TodoState>(
+  (ref) => TodoNotifier(ref: ref),
+);
 
 class TodoState {
   const TodoState({this.todoList = const []});
@@ -10,22 +15,30 @@ class TodoState {
   }
 }
 
-class TodoNotifier {
-  TodoNotifier();
+class TodoNotifier extends StateNotifier<TodoState> {
+  TodoNotifier({required Ref ref})
+      : _ref = ref,
+        super(const TodoState());
 
-  final _todo = const Todo();
-  final _todoState = const TodoState();
+  final Ref _ref;
+  
+  get title => null;
 
-  //
   void addTodo(String title) {
     // idはincrementする形で作成する
-    final id = _todoState.todoList.length + 1;
+    final id = state.todoList.length + 1;
 
-    _todoState.copyWith(
+    state = state.copyWith(
       todoList: [
-        _todo.copyWith(id: id, title: title),
-        ..._todoState.todoList,
+        const Todo().copyWith(id: id, title: title),
+        ...state.todoList,
       ],
     );
   }
-}
+
+  void deleteTodo(int id) {
+
+    final newList = state.todoList.where((Todo) => Todo.id != id).toList();
+    state = state.copyWith(todoList: newList);
+  }
+} 
