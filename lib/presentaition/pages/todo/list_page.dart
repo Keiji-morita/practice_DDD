@@ -28,9 +28,25 @@ class TodoList extends ConsumerWidget {
             child: SizedBox(
               height: 50,
               child: Card(
-                child: Center(
-                  child: Text(todo.title),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+
+                    Checkbox(
+                      activeColor: Colors.red,
+                      checkColor: Colors.white,
+                      onChanged: (value){
+                        notifier.isChecked(false);
+                      }, 
+                      value: todo.isDone,
+
+                    ),
+
+                    Text(todo.title),
+
+                  ],
                 ),
+                
               ),
             )
             );
