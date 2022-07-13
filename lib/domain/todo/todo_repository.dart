@@ -2,6 +2,7 @@
 
 import 'package:practiceddd/domain/todo/todo_data.dart';
 import 'package:practiceddd/domain/category/database/todo_database.dart';
+import 'package:sqflite/sqlite_api.dart';
 
 class TodoRepository {
   final _db = TodoDatabase();
@@ -10,16 +11,21 @@ class TodoRepository {
 
   TodoRepository(this._todoDatabase);
 
-  Future<Future<List>> getTodos() async {
-    return _todoDatabase.getTodos();
+  Future<Future<void>> getTodos() async {
+    return getTodos();
   }
 
-  Future<Todo> addTodo(Todo todo) async {
-    return _todoDatabase.insert(todo);
+    Future<void> insertMemo(Todo todo) async {
+    // final Database _db = await database;
+    await _db.insert(
+      'todo',
+      todo.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   Future<void> updateTodo(Todo todo) async {
-    return _todoDatabase.update(todo);
+    return _todoDatabase.update(String, todo);
   }
 
   Future<void> deleteTodo(int id) async {

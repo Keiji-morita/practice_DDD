@@ -20,11 +20,12 @@ class Todo {
     return Todo(id: id ?? this.id, title: title ?? this.title, isDone: isDone ?? this.isDone);
   }
 
-    Map<String, dynamic> toJson() =>
-    {
-      'id': "",
-      'title': "",
-    };
+    Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      };
+    }
 
   static fromJson(Map<String, Object?> map) {}
 
