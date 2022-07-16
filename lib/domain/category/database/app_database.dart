@@ -24,7 +24,6 @@ class AppDatabase {
       CREATE TABLE todos(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT,
-        is_done BOOLEAN
       )
     ''');
   }

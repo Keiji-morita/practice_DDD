@@ -4,16 +4,9 @@ import 'package:path/path.dart';
 import 'package:practiceddd/presentaition/pages/todo/list_page.dart';
 import 'package:sqflite/sqflite.dart';
 
-void main() async {
-  final database = openDatabase(
-        join(await getDatabasesPath(), 'memo_database.db'),
-    onCreate: (db, version) {
-      
-      return db.execute(
-        "CREATE TABLE memo(id INTEGER PRIMARY KEY, text TEXT, priority INTEGER)",
-      );
-    },
-  );
+
+
+void main()  {
   runApp(const ProviderScope(child: MyApp()));
 }
 

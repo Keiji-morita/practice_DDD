@@ -25,7 +25,9 @@ class TodoNotifier extends StateNotifier<TodoState> {
 
   TodoNotifier(this._todoRepository,{required Ref ref} )
       : _ref = ref,
-        super(const TodoState());
+        super(const TodoState()) {
+          getTodos();
+        }
 
   final Ref _ref;
   final TodoRepository _todoRepository;
@@ -33,7 +35,8 @@ class TodoNotifier extends StateNotifier<TodoState> {
   
 
   Future<void> addTodo(String title) async {
-    await _todoRepository.getTodos();
+    final todo = await TodoRepository.addTodo(
+      Todo);
     // idはincrementする形で作成する
     final id = state.todoList.length + 1;
 
@@ -44,16 +47,20 @@ class TodoNotifier extends StateNotifier<TodoState> {
         ...state.todoList,
       ],
     );
+
+    print("added");
   }
 
   void isChecked(bool isDone){
     isDone != isDone;
   }
 
+  Future<void> getTodos() async {
+    final todos = await _todoRepository.getTodos();
+    state = state.copyWith();
+  }
 
-  Future<void> deleteTodo(int id) async {
-    await _todoRepository.deleteTodo(id);
-
+  Future<void> deleteTodo(int id) async{
     final newList = state.todoList.where((Todo) => Todo.id != id).toList();
     state = state.copyWith(todoList: newList);
   }

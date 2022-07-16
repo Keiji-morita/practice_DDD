@@ -20,14 +20,30 @@ class Todo {
     return Todo(id: id ?? this.id, title: title ?? this.title, isDone: isDone ?? this.isDone);
   }
 
-    Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'title': title,
-      };
+    factory Todo.fromJson(Map<String, dynamic> json){
+      return Todo(
+        id: json['todoId'],
+        title: json['todoTitle']
+      );
     }
 
-  static fromJson(Map<String, Object?> map) {}
+    Map<String, Object?> toJson() => {
+        'id' : id,
+      'title': title,
+      };
+  //   Map<String, dynamic> toMap() {
+  //   return {
+  //     'id': id,
+  //     'title': title,
+  //     };
+  //   }
+  // static Todo fromMap(Map<String, dynamic> map) {
+  //   var todo = Todo(
+  //     id: map["id"],
+  //     title: map["title"],
+  //   );
+  //   return todo;
+  // }
 
   // factory Todo.fromMap(Map<String, dynamic> json) => new Todo(
   //   id: json['id'],
