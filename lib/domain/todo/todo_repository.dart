@@ -98,8 +98,8 @@ class TodoRepository {
 
   TodoRepository(this._todoDatabase);
 
-  Future<Future<List>> getTodos() async {
-    return _todoDatabase.getTodos();
+  Future<List<Todo>> getTodos() async {
+    return await _todoDatabase.getTodos();
   }
 
   Future<Todo> addTodo(Todo todo) async {

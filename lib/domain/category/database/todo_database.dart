@@ -6,7 +6,7 @@ import 'package:sqflite/sqflite.dart';
 class TodoDatabase extends AppDatabase {
   final String _tableName = 'todos';
 
-  Future<List> getTodos() async {
+  Future<List<Todo>> getTodos() async {
     final db = await database;
     final maps = await db.query(
       _tableName,

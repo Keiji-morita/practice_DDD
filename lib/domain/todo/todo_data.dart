@@ -22,8 +22,8 @@ class Todo {
 
     factory Todo.fromJson(Map<String, dynamic> json){
       return Todo(
-        id: json['todoId'],
-        title: json['todoTitle']
+        id: json['id'],
+        title: json['title']
       );
     }
 

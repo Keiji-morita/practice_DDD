@@ -22,8 +22,10 @@ class AddingPage extends ConsumerWidget {
               controller: todoController,
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async{
                 notifier.addTodo(todoController.text);
+                final todos = await notifier.getTodos();
+                print(todos.length);
                 Navigator.pop(context);
               },
               child: const Text('Yarude!'),

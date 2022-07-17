@@ -1,3 +1,6 @@
+
+import 'dart:math' as math;
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practiceddd/domain/todo/todo_data.dart';
 import 'package:practiceddd/domain/todo/todo_repository.dart';
@@ -22,6 +25,7 @@ class TodoState {
 }
 
 class TodoNotifier extends StateNotifier<TodoState> {
+  
 
   TodoNotifier(this._todoRepository,{required Ref ref} )
       : _ref = ref,
@@ -34,11 +38,17 @@ class TodoNotifier extends StateNotifier<TodoState> {
   get title => null;
   
 
+
   Future<void> addTodo(String title) async {
-    final todo = await TodoRepository.addTodo(
-      Todo);
-    // idはincrementする形で作成する
     final id = state.todoList.length + 1;
+    final todos = await _todoRepository.addTodo(
+      Todo(
+        id: id,
+        title: title,
+      ),
+    );
+    // idはincrementする形で作成する
+    
 
 
     state = state.copyWith(
@@ -55,15 +65,14 @@ class TodoNotifier extends StateNotifier<TodoState> {
     isDone != isDone;
   }
 
-  Future<void> getTodos() async {
+  Future<List<Todo>> getTodos() async {
     final todos = await _todoRepository.getTodos();
-    state = state.copyWith();
+    state = state.copyWith(todoList: todos);
+    return todos;
   }
 
   Future<void> deleteTodo(int id) async{
     final newList = state.todoList.where((Todo) => Todo.id != id).toList();
     state = state.copyWith(todoList: newList);
   }
-
-
 } 
